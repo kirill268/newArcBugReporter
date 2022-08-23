@@ -36,7 +36,7 @@ const App: () => Node = () => {
         <Text>Open the modal</Text>
       </TouchableOpacity>
 
-      <Modalize ref={modalizeRef}>
+      <Modalize rootStyle={{backgroundColor: 'red'}} ref={modalizeRef}>
         <Text>SHEET</Text>
         <Text>SHEET</Text>
         <Text>SHEET</Text>
