@@ -6,43 +6,44 @@
  * @flow strict-local
  */
 
-import type { Node } from "react";
-import React from "react";
-import { StyleSheet, Text, useColorScheme, View } from "react-native";
+import type {Node} from 'react';
+import React, {useRef} from 'react';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from 'react-native';
 
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-const Tab = createMaterialTopTabNavigator();
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {Modalize} from 'react-native-modalize';
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const modalizeRef = useRef<Modalize>(null);
+
+  const onOpen = () => {
+    modalizeRef.current?.open();
   };
 
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Home!</Text>
+      <TouchableOpacity onPress={onOpen}>
+        <Text>Open the modal</Text>
+      </TouchableOpacity>
+
+      <Modalize ref={modalizeRef}>
+        <Text>SHEET</Text>
+        <Text>SHEET</Text>
+        <Text>SHEET</Text>
+        <Text>SHEET</Text>
+        <Text>SHEET</Text>
+      </Modalize>
+    </View>
   );
 };
 
